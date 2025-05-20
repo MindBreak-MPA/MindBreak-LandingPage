@@ -19,9 +19,10 @@
 
     nav {
       background-color: #00274d;
-      padding: 1rem 0;
+      padding: 1rem 2rem;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
     }
 
     nav ul {
@@ -43,11 +44,26 @@
       background-color: #004080;
     }
 
+    .download-btn {
+      background-color: #004080;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: #0059b3;
+    }
+
     .container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100% - 80px); /* Adjust height to fit below navbar */
+      height: calc(100% - 80px); /* adjust for navbar */
       padding: 0 5cm;
     }
 
@@ -94,21 +110,25 @@
       height: 100%;
       position: relative;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .carousel img {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: auto;
+      height: 80%;
+      max-height: 80%;
+      max-width: 50%;
+      object-fit: contain;
       opacity: 0;
-      transform: translateY(0);
       transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      transform: translateY(0);
     }
 
     .carousel img.active {
       opacity: 1;
-      transform: translateY(0);
       z-index: 1;
     }
 
@@ -128,6 +148,7 @@
       <li><a href="https://www.canva.com/design/DAGnxx9S2Dw/qPG_bb4JC4P7xr74VPkCpQ/edit">Pitch</a></li>
       <li><a href="https://www.figma.com/design/n2peoVcxpTzPJ8HHaTfUO0/Untitled?node-id=0-1&t=Li8Yg3b8oriflirl-1">Product Design</a></li>
     </ul>
+    <button class="download-btn">Descarcă aplicația</button>
   </nav>
 
   <!-- Main Content -->
