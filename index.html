@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>MindBreak Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero" id="hero">
+        <img src="logo.png" alt="MindBreak Logo" class="logo">
+        <h1>Bine ai venit la <span>MindBreak</span></h1>
+        <p class="subtitle">Aplicația care îți aduce pauze inteligente pentru un focus sustenabil.</p>
+        <div class="buttons">
+            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">UI Mockup (Figma)</a>
+            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">Pitch</a>
+            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">Business Foundation</a>
+        </div>
+    </div>
+
+    <div class="team-section" id="team">
+        <h2>Echipa MindBreak</h2>
+        <div class="team-logos">
+            <img src="logo.png" alt="Member 1" class="team-logo">
+            <img src="logo.png" alt="Member 2" class="team-logo">
+            <img src="logo.png" alt="Member 3" class="team-logo">
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const hero = document.getElementById("hero");
+            const team = document.getElementById("team");
+            if (window.scrollY > 100) {
+                hero.classList.add("hidden");
+                team.classList.add("show");
+            } else {
+                hero.classList.remove("hidden");
+                team.classList.remove("show");
+            }
+        });
+    </script>
+</body>
+</html>
