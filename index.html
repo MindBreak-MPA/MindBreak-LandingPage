@@ -11,10 +11,15 @@
       padding: 0;
     }
 
-    body, html {
+    html, body {
       height: 100%;
-      background-color: #add8e6; /* light blue */
       font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+    }
+
+    body {
+      background-color: #add8e6; /* light blue */
     }
 
     nav {
@@ -23,6 +28,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     nav ul {
@@ -59,26 +67,38 @@
       background-color: #0059b3;
     }
 
-    .container {
+    .cards-wrapper {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100% - 80px); /* adjust for navbar */
-      padding: 0 5cm;
+      flex-direction: column;
     }
 
     .card {
+      height: 100vh;
       display: flex;
-      background-color: #00274d; /* dark blue */
-      height: 50vh;
-      width: 100%;
+      background-color: #00274d;
       border-radius: 10px;
       overflow: hidden;
-      position: relative;
+      padding: 0 5cm;
+      align-items: center;
+      justify-content: space-between;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .card.hidden {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-image, .card-text, .carousel {
+      flex: 1;
     }
 
     .card-image {
-      width: 30%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -86,19 +106,11 @@
     }
 
     .card-image img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
       max-width: 300px;
       max-height: 300px;
     }
 
     .card-text {
-      width: 40%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       color: white;
       font-size: 1.5rem;
       text-align: center;
@@ -106,10 +118,8 @@
     }
 
     .carousel {
-      width: 30%;
-      height: 100%;
       position: relative;
-      overflow: hidden;
+      height: 80%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -117,14 +127,11 @@
 
     .carousel img {
       position: absolute;
-      width: auto;
-      height: 80%;
       max-height: 80%;
       max-width: 50%;
       object-fit: contain;
       opacity: 0;
       transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-      transform: translateY(0);
     }
 
     .carousel img.active {
@@ -135,7 +142,52 @@
     .carousel img.fade-up {
       opacity: 0;
       transform: translateY(-50%);
-      z-index: 0;
+    }
+
+    .circle-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #00274d;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .circles {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .circle {
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .circle.small {
+      width: 50px;
+      height: 50px;
+    }
+
+    .circle.medium {
+      width: 80px;
+      height: 80px;
+    }
+
+    .circle.large {
+      width: 100px;
+      height: 100px;
+    }
+
+    .circle-card.hidden {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+
+    .circle-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -144,16 +196,17 @@
   <!-- Navbar -->
   <nav>
     <ul>
-      <li><a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0">Business Foundation</a></li>
-      <li><a href="https://www.canva.com/design/DAGnxx9S2Dw/qPG_bb4JC4P7xr74VPkCpQ/edit">Pitch</a></li>
-      <li><a href="https://www.figma.com/design/n2peoVcxpTzPJ8HHaTfUO0/Untitled?node-id=0-1&t=Li8Yg3b8oriflirl-1">Product Design</a></li>
+      <li><a href="#">Business Foundation</a></li>
+      <li><a href="#">Pitch</a></li>
+      <li><a href="#">Product Design</a></li>
     </ul>
     <button class="download-btn">Descarcă aplicația</button>
   </nav>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="card">
+  <!-- Scrollable Cards -->
+  <div class="cards-wrapper">
+    <!-- First Card -->
+    <section class="card hidden">
       <div class="card-image">
         <img src="logo.png" alt="Logo"/>
       </div>
@@ -167,12 +220,23 @@
         <img src="img3.png" alt="4"/>
         <img src="img4.png" alt="5"/>
         <img src="img5.png" alt="6"/>
-        <img src="img7.png" alt="8"/>
+        <img src="img7.png" alt="7"/>
       </div>
-    </div>
+    </section>
+
+    <!-- Second Card with Circles -->
+    <section class="circle-card hidden">
+      <h2 style="color: white;">Focus pe relaxare</h2>
+      <div class="circles">
+        <div class="circle small"></div>
+        <div class="circle medium"></div>
+        <div class="circle large"></div>
+      </div>
+    </section>
   </div>
 
   <script>
+    // Image carousel
     document.addEventListener("DOMContentLoaded", function () {
       const images = document.querySelectorAll('.carousel img');
       let current = 0;
@@ -186,11 +250,32 @@
         const nextImg = images[current];
         nextImg.classList.add('active');
 
-        // Clean up after animation
         setTimeout(() => {
           currentImg.classList.remove('fade-up');
         }, 1000);
       }, 3000);
+    });
+
+    // Slide/fade in-out for cards on scroll
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            entry.target.classList.remove('hidden');
+          } else {
+            entry.target.classList.remove('visible');
+            entry.target.classList.add('hidden');
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+
+    document.querySelectorAll('.card, .circle-card').forEach(section => {
+      observer.observe(section);
     });
   </script>
 </body>
