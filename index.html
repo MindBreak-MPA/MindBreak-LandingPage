@@ -67,21 +67,27 @@
       background-color: #0059b3;
     }
 
-    .cards-wrapper {
-      display: flex;
-      flex-direction: column;
+    .card-wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        scroll-snap-align: start;
+        padding: 0 2cm;
+        box-sizing: border-box;
     }
 
     .card {
-      height: 100vh;
-      display: flex;
-      background-color: #00274d;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 0 5cm;
-      align-items: center;
-      justify-content: space-between;
-      transition: opacity 1s ease, transform 1s ease;
+        display: flex;
+        background-color: #00274d;
+        height: 50vh;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
     }
 
     .card.hidden {
