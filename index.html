@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <title>MindBreak Landing Page</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>MindBreak Landing Page</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hero" id="hero">
-        <img src="logo.png" alt="MindBreak Logo" class="logo">
-        <h1>Bine ai venit la <span>MindBreak</span></h1>
-        <p class="subtitle">Aplicația care îți aduce pauze inteligente pentru un focus sustenabil.</p>
-        <div class="buttons">
-            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">UI Mockup (Figma)</a>
-            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">Pitch</a>
-            <a href="https://docs.google.com/document/d/1tBlzQDPGzr9HYhQRCuqeLyZgmNlLdKxN2-h_KTWePkA/edit?tab=t.0" target="_blank">Business Foundation</a>
+  <div class="main-panel" id="main-panel">
+    <div class="card">
+      <div class="card-left">
+        <img src="logo.png" alt="MindBreak Logo" class="main-logo">
+      </div>
+      <div class="card-center">
+        <p class="tagline">Aplicația care îți aduce pauze inteligente pentru un focus sustenabil.</p>
+      </div>
+      <div class="card-right">
+        <div class="carousel" id="carousel">
+          <img src="logo.png" alt="Slide 1" class="slide active">
+          <img src="logo.png" alt="Slide 2" class="slide">
+          <img src="logo.png" alt="Slide 3" class="slide">
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="team-section" id="team">
-        <h2>Echipa MindBreak</h2>
-        <div class="team-logos">
-            <img src="logo.png" alt="Member 1" class="team-logo">
-            <img src="logo.png" alt="Member 2" class="team-logo">
-            <img src="logo.png" alt="Member 3" class="team-logo">
-        </div>
+  <div class="team-section" id="team-section">
+    <h2>Echipa MindBreak</h2>
+    <div class="team-container">
+      <div class="member">
+        <img src="logo.png" class="team-logo">
+        <p>Alice</p>
+      </div>
+      <div class="member">
+        <img src="logo.png" class="team-logo">
+        <p>Alejandro</p>
+      </div>
+      <div class="member">
+        <img src="logo.png" class="team-logo">
+        <p>Claudiu</p>
+      </div>
     </div>
+  </div>
 
-    <script>
-        window.addEventListener("scroll", function() {
-            const hero = document.getElementById("hero");
-            const team = document.getElementById("team");
-            if (window.scrollY > 100) {
-                hero.classList.add("hidden");
-                team.classList.add("show");
-            } else {
-                hero.classList.remove("hidden");
-                team.classList.remove("show");
-            }
-        });
-    </script>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+    setInterval(() => {
+      slides.forEach((s, i) => s.classList.toggle('active', i === index));
+      index = (index + 1) % slides.length;
+    }, 2500);
+
+    window.addEventListener('scroll', () => {
+      const panel = document.getElementById('main-panel');
+      const team = document.getElementById('team-section');
+      if (window.scrollY > 100) {
+        panel.classList.add('fade-out');
+        team.classList.add('fade-in');
+      } else {
+        panel.classList.remove('fade-out');
+        team.classList.remove('fade-in');
+      }
+    });
+  </script>
 </body>
 </html>
